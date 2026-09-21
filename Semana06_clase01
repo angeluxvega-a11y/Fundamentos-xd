@@ -1,0 +1,39 @@
+from eii_utils import limpiar_consola, leer_entero, leer_booleano, imprimir_mensaje
+limpiar_consola()
+
+#Caso1: Autorización y Control de Lote de Producción
+#Variables
+temperatura_horno:int = 0
+presion_linea:bool = True
+materia_prima_disponible:bool = True
+orden_reabastecimiento:bool = True
+cantidad_operarios:int = 0
+turno_nocturno:bool = False
+calidad_no_aprobada:bool = True
+mantenimiento_pendiente:bool = True
+
+#Proceso
+temperatura_horno = leer_entero("Cual es la temperatura del horno?")
+presion_linea = leer_booleano("La presión de línea se encuentra óptima?")
+materia_prima_disponible = leer_booleano ("Existe materia prima disponible en bodega?")
+orden_reabastecimiento = leer_booleano ("Hay una orden de reabastecimiento activa?")
+cantidad_operarios = leer_entero ("Cuantos operarios hay en este momento?")
+turno_nocturno = leer_booleano ("La planta se encuentra en turno nocturno?")
+
+if (temperatura_horno >= 180) and (presion_linea == True) and (materia_prima_disponible == True or orden_reabastecimiento == True):
+    imprimir_mensaje ("Lote autorizado")
+    if (cantidad_operarios >= 3) and (turno_nocturno == False):
+        imprimir_mensaje ("Pertenece a la línea 1 (Alta Velocidad)")
+    else: 
+        imprimir_mensaje ("Pertenece a la línea 2 (Estándar)")
+else: 
+     imprimir_mensaje ("Lote no autorizado")
+     if (calidad_no_aprobada == True) or (mantenimiento_pendiente == True):
+         imprimir_mensaje ("Paro técnico obligatorio")
+     else: 
+            imprimir_mensaje ("Detenido en espera de materia prima")
+
+
+
+
+
